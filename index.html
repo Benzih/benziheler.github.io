@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Benzi Heler — Apps</title>
+  <meta name="description" content="Apps by Benzi Heler — CarInfo AR, GoThereAi, and SpeakIt on Google Play." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>Benzi Heler</h1>
+      <p class="tagline">Independent Android developer. Building useful apps on Google Play.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="apps">
+      <h2 class="section-title">My Apps</h2>
+      <div class="grid">
+
+        <article class="card">
+          <div class="icon icon-carinfo">🚗</div>
+          <h3>CarInfo AR</h3>
+          <p>Augmented reality car information — scan and instantly learn about any vehicle.</p>
+          <a class="btn" href="https://play.google.com/store/apps/details?id=com.carinfo.ar" target="_blank" rel="noopener">Get on Google Play</a>
+        </article>
+
+        <article class="card">
+          <div class="icon icon-gothere">🧭</div>
+          <h3>GoThereAi</h3>
+          <p>AI-powered navigation and travel assistant. Get there smarter.</p>
+          <a class="btn" href="https://play.google.com/store/apps/details?id=app.gothereai" target="_blank" rel="noopener">Get on Google Play</a>
+        </article>
+
+        <article class="card">
+          <div class="icon icon-speakit">🗣️</div>
+          <h3>SpeakIt</h3>
+          <p>Turn text into natural speech. Fast, simple, and accurate.</p>
+          <a class="btn" href="https://play.google.com/store/apps/details?id=gg.speakit" target="_blank" rel="noopener">Get on Google Play</a>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="about">
+      <h2 class="section-title">About</h2>
+      <p>
+        I'm Benzi Heler, a solo developer based in Tel Aviv. I design and build
+        Android apps focused on practical, delightful everyday tools.
+      </p>
+    </section>
+
+    <section class="contact">
+      <h2 class="section-title">Contact</h2>
+      <p>
+        Questions, feedback, or collaboration ideas?
+        <a href="mailto:benziheler@gmail.com">benziheler@gmail.com</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="year"></span> Benzi Heler. All rights reserved.</p>
+      <p class="links">
+        <a href="privacy.html">Privacy Policy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
