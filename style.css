@@ -610,6 +610,90 @@ footer {
 .footer-links a:hover { color: var(--fire-glow); }
 .footer-copy { font-size: 12px; color: var(--muted); }
 
+/* Language switcher */
+.lang-switcher {
+  position: relative;
+  margin-left: 24px;
+}
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(5,3,8,.5);
+  backdrop-filter: blur(10px);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  transition: all .25s;
+}
+.lang-btn:hover {
+  border-color: rgba(255,170,51,.5);
+  color: var(--fire-glow);
+  transform: translateY(-1px);
+}
+.lang-flag { font-size: 16px; }
+.lang-menu {
+  list-style: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 200px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 6px;
+  border: 1px solid rgba(255,170,51,.2);
+  border-radius: 14px;
+  background: rgba(12,8,22,.95);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px -10px rgba(0,0,0,.8), 0 0 30px -10px rgba(255,107,26,.3);
+  opacity: 0;
+  transform: translateY(-8px) scale(.96);
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  z-index: 100;
+}
+.lang-menu.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.lang-menu li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background .2s, color .2s;
+}
+.lang-menu li:hover {
+  background: rgba(255,170,51,.08);
+  color: var(--fire-glow);
+}
+.lang-menu li > span:first-child { font-size: 18px; }
+.lang-menu li > span:nth-child(2) { flex: 1; }
+.lang-iso {
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+/* RTL */
+body.rtl .nav,
+body.rtl .hero-stats,
+body.rtl .footer-inner { direction: rtl; }
+body.rtl .lang-switcher { margin-left: 0; margin-right: 24px; }
+body.rtl .lang-menu { right: auto; left: 0; }
+body.rtl .btn-arrow { transform: scaleX(-1); }
+body.rtl .card-cta svg { transform: scaleX(-1); }
+
 /* Responsive */
 @media (max-width: 860px) {
   .manifesto-grid { grid-template-columns: 1fr; gap: 40px; }

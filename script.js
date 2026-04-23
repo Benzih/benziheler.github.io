@@ -1,5 +1,87 @@
 // BENZI HELER — client-side interactions
 
+// ===== i18n =====
+(() => {
+  const I18N = window.I18N || {};
+  const SUPPORTED = Object.keys(I18N);
+  const KEY = 'bh_lang';
+
+  const detect = () => {
+    const saved = localStorage.getItem(KEY);
+    if (saved && SUPPORTED.includes(saved)) return saved;
+    const nav = (navigator.language || 'en').toLowerCase();
+    const short = nav.split('-')[0];
+    if (SUPPORTED.includes(short)) return short;
+    // map some variants
+    if (short === 'iw') return 'he';
+    if (short === 'in') return 'id';
+    return 'en';
+  };
+
+  const apply = (lang) => {
+    const dict = I18N[lang] || I18N.en;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = dict.dir || 'ltr';
+    document.body.classList.toggle('rtl', dict.dir === 'rtl');
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) el.textContent = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+
+    const flag = document.getElementById('langFlag');
+    const code = document.getElementById('langCode');
+    if (flag) flag.textContent = dict.flag;
+    if (code) code.textContent = lang.toUpperCase();
+    localStorage.setItem(KEY, lang);
+  };
+
+  const buildMenu = () => {
+    const menu = document.getElementById('langMenu');
+    if (!menu) return;
+    menu.innerHTML = '';
+    SUPPORTED.forEach(code => {
+      const d = I18N[code];
+      const li = document.createElement('li');
+      li.innerHTML = `<span>${d.flag}</span><span>${d.name}</span><span class="lang-iso">${code.toUpperCase()}</span>`;
+      li.dataset.lang = code;
+      li.addEventListener('click', () => {
+        apply(code);
+        menu.classList.remove('open');
+      });
+      menu.appendChild(li);
+    });
+  };
+
+  const initSwitcher = () => {
+    const btn = document.getElementById('langBtn');
+    const menu = document.getElementById('langMenu');
+    if (!btn || !menu) return;
+    buildMenu();
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menu.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target) && e.target !== btn) menu.classList.remove('open');
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') menu.classList.remove('open');
+    });
+  };
+
+  apply(detect());
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSwitcher);
+  } else {
+    initSwitcher();
+  }
+})();
+
 // ===== Starfield =====
 (() => {
   const canvas = document.getElementById('stars');
@@ -51,12 +133,8 @@
   let tx = mx, ty = my;
 
   window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  window.addEventListener('mouseleave', () => {
-    c.style.opacity = 0; t.style.opacity = 0;
-  });
-  window.addEventListener('mouseenter', () => {
-    c.style.opacity = 1; t.style.opacity = 1;
-  });
+  window.addEventListener('mouseleave', () => { c.style.opacity = 0; t.style.opacity = 0; });
+  window.addEventListener('mouseenter', () => { c.style.opacity = 1; t.style.opacity = 1; });
 
   const loop = () => {
     c.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
@@ -67,7 +145,6 @@
   };
   loop();
 
-  // hover state
   document.querySelectorAll('a, button, [data-tilt], .card').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
@@ -87,7 +164,7 @@
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 })();
 
-// ===== 3D tilt on cards =====
+// ===== 3D tilt =====
 (() => {
   document.querySelectorAll('[data-tilt]').forEach(el => {
     el.addEventListener('mousemove', (e) => {
@@ -97,13 +174,11 @@
       const maxRot = 7;
       el.style.transform = `translateY(-8px) perspective(800px) rotateX(${-py * maxRot}deg) rotateY(${px * maxRot}deg)`;
     });
-    el.addEventListener('mouseleave', () => {
-      el.style.transform = '';
-    });
+    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
   });
 })();
 
-// ===== Parallax hero background =====
+// ===== Parallax hero bg =====
 (() => {
   const bg = document.querySelector('.hero-bg');
   if (!bg) return;
