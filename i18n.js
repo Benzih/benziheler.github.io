@@ -28,7 +28,7 @@ window.I18N = {
   he: {
     dir: 'rtl', name: 'עברית', flag: '🇮🇱',
     kicker: 'מפתח אנדרואיד עצמאי',
-    tagline: 'מפתח אפליקציות שימושיות ומושלמות<br/>בצומת של <span class="fire">אש</span> ו<span class="bolt">ברק</span>.',
+    tagline: 'מפתח אפליקציות שימושיות ומושלמות<br/>בין <span class="fire">אש</span> ל<span class="bolt">ברק</span>.',
     cta_explore: 'לאפליקציות', cta_contact: 'יצירת קשר',
     stat_apps: 'אפליקציות', stat_ideas: 'רעיונות', stat_solo: 'בנייה עצמית',
     nav_apps: 'אפליקציות', nav_about: 'אודות', nav_contact: 'צור קשר', scroll: 'גלול',
