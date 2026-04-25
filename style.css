@@ -695,12 +695,33 @@ body.rtl .btn-arrow { transform: scaleX(-1); }
 body.rtl .card-cta svg { transform: scaleX(-1); }
 
 /* Responsive */
+.hero-img-mobile { display: none; }
+
 @media (max-width: 860px) {
   .manifesto-grid { grid-template-columns: 1fr; gap: 40px; }
   .hero-stats { gap: 20px; padding: 16px 24px; }
   .stat b { font-size: 1.5rem; }
   .nav-links { gap: 18px; }
   .section { padding: 100px max(20px, 5vw); }
+}
+@media (max-width: 760px) {
+  .hero { min-height: auto; }
+  .hero-bg { display: none; }
+  .hero-overlay {
+    background: linear-gradient(180deg, rgba(5,3,8,.2) 0%, rgba(5,3,8,.6) 70%, var(--bg) 100%);
+  }
+  .hero-content { padding: 20px 20px 80px; }
+  .hero-img-mobile {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    margin: 0 auto 28px;
+    border-radius: 14px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.5), 0 0 60px rgba(255,107,26,.15);
+  }
+  .hero-kicker { font-size: 11px; letter-spacing: .3em; padding: 8px 16px; margin-bottom: 24px; }
+  .hero-sub { font-size: 1.05rem; }
 }
 @media (max-width: 560px) {
   .nav { padding: 20px; }
